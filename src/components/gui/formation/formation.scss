@@ -1,0 +1,17 @@
+.formation__container {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+
+  .formation__item {
+    margin-top: 0.4em;
+
+    &:not(:last-child) {
+      margin-bottom: 0.2em;
+    }
+
+    .formation__item__label {
+      font-weight: 700;
+    }
+  }
+}

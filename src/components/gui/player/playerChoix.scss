@@ -1,0 +1,46 @@
+.player_choice__container {
+  background-color: black;
+  color: white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  font-size: 2.5rem;
+
+  .player_choice__content {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .player_choice__player {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    cursor: pointer;
+
+
+    .player_choice__player__img {
+      height: 15rem;
+      width: 15rem;
+      filter: grayscale(80%);
+
+      &:hover {
+        transform: translateY(-0.2em);
+        transition: ease-in-out;
+        transition-duration: 200ms;
+        filter: none;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+}

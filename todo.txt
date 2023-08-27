@@ -1,0 +1,12 @@
+game: 
+x render entity
+x gravity
+x player movement
+x player collision
+  player animations
+  gui
+
+
+app: 
+  redux store
+  get course [api] (level, modules, timer, files)

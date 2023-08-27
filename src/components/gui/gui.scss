@@ -1,0 +1,15 @@
+.gui__container {
+  z-index: 2;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 20px;
+
+  div {
+    background-color: white;
+    border-radius: 5px;
+  }
+}

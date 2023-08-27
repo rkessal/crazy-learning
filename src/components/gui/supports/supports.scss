@@ -1,0 +1,14 @@
+.supports__container {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  width: 7em;
+
+  .supports__menu {
+    cursor: pointer;
+  }
+
+  .supports__module__support {
+    text-indent: 1.5em;
+  }
+}
