@@ -2,7 +2,7 @@ import { EntityState, StateComponent } from "../components/State";
 import { MoveWithInputComponent } from "../components/MoveWithInput";
 import { VelocityComponent } from "../components/Velocity";
 import { EntityManager } from "../entity/EntityManager";
-import { config } from "../../config/config"; 
+import { config } from "../../config/config";
 
 export class PlayerInputSystem {
   entityManager: EntityManager
@@ -25,6 +25,7 @@ export class PlayerInputSystem {
   }
 
   update(deltaTime: number) {
+
     const entities = this.entityManager.getEntitiesWithComponents(VelocityComponent);
 
     entities.forEach(entity => {
@@ -33,16 +34,15 @@ export class PlayerInputSystem {
       const stateComponent = entity.getComponent(StateComponent)
 
       if (this.keys['a']) {
-        velocityComponent.x = -config.RUN_VELOCITY* deltaTime;
-        if (stateComponent.state !== EntityState.JUMPING) stateComponent.state = EntityState.RUNNING
+        velocityComponent.x = -config.RUN_VELOCITY * deltaTime;
+        stateComponent.state = EntityState.RUNNING
       }
       if (this.keys['d']) {
         velocityComponent.x = config.RUN_VELOCITY * deltaTime;
-        if (stateComponent.state !== EntityState.JUMPING) stateComponent.state = EntityState.RUNNING
+        stateComponent.state = EntityState.RUNNING
       }
-      if (this.keys['w'] && stateComponent.state !== EntityState.JUMPING) {
+      if (this.keys['w']) {
         velocityComponent.y = -config.JUMP_VELOCITY * deltaTime;
-        stateComponent.state = EntityState.JUMPING
       }
 
       if (velocityComponent.x >= -0.5 && velocityComponent.x <= 0.5) velocityComponent.x = 0

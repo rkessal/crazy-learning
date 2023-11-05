@@ -8,14 +8,10 @@ import { VelocitySystem } from "../ecs/systems/Velocity";
 
 import { config } from "../config/config"
 
-import box1Img from "../assets/box-1.png"
-import groundImg from "../assets/terrain.png"
-import treeImg from "../assets/tree.png"
-
 import Player from "./Player";
-import Box from "./Box";
-import Ground from "./Ground";
-import Tree from "./Tree";
+import GameLevel from "./GameLevel";
+import { useAppSelector } from "../redux/hooks";
+import { selectLevel } from "../redux/features/level/levelSlice";
 
 
 type Props = {
@@ -23,38 +19,40 @@ type Props = {
 }
 
 
+
 function Game({ app }: Props) {
-
-
-  const { GROUND } = config
+  const levels = useAppSelector(selectLevel)
   const entityManager = new EntityManager();
+  const playerInputSystem = new PlayerInputSystem(entityManager);
+  const renderSystem = new RenderSystem(entityManager, app.stage);
+  const collisionSystem = new CollisionSytem(entityManager)
+  const gravitySystem = new GravitySystem(entityManager, app.screen)
+  const velocitySystem = new VelocitySystem(entityManager)
+
+  const gameLoop = (deltaTime) => {
+    playerInputSystem.update(deltaTime);
+    collisionSystem.update(deltaTime)
+    velocitySystem.update(deltaTime)
+    gravitySystem.update(deltaTime)
+    renderSystem.update(deltaTime)
+  }
   useEffect(() => {
     document.body.appendChild(app.view);
-
-    const playerInputSystem = new PlayerInputSystem(entityManager);
-    const renderSystem = new RenderSystem(entityManager, app.stage);
-    const collisionSystem = new CollisionSytem(entityManager)
-    const gravitySystem = new GravitySystem(entityManager, app.screen)
-    const velocitySystem = new VelocitySystem(entityManager)
-
-
-    app.ticker.add((deltaTime: number) => {
-      playerInputSystem.update(deltaTime);
-      collisionSystem.update(deltaTime)
-      gravitySystem.update()
-      velocitySystem.update()
-      renderSystem.update(deltaTime)
-    });
+    app.ticker.maxFPS = 60
+    app.ticker.add(gameLoop);
 
     app.start();
+    return () => {
+      app.ticker.remove(gameLoop)
+      app.stage.removeChildren()
+      document.body.removeChild(app.view)
+    }
   }, [])
   return (
     <>
-      <Ground entityManager={entityManager} size={{ width: 742, height: GROUND }} position={{ x: 0, y: app.screen.height - GROUND }} texture={groundImg} />
-      <Ground entityManager={entityManager} size={{ width: 742, height: GROUND }} position={{ x: 741, y: app.screen.height - GROUND }} texture={groundImg} />
-      <Tree entityManager={entityManager} size={{ width: 140, height: 233 }} texture={treeImg} position={{ x: 200, y: app.screen.height - GROUND }} />
-      <Box id="supp1" entityManager={entityManager} size={{ width: 129, height: 118 }} texture={box1Img} position={{ x: app.screen.width / 2, y: app.screen.height - GROUND }} />
-      <Box id="supp2" entityManager={entityManager} size={{ width: 129, height: 118 }} texture={box1Img} position={{ x: app.screen.width / 2 + 500, y: app.screen.height - GROUND }} />
+      {levels.levels.map(level => (
+        level.id === levels.current && <GameLevel entityManager={entityManager} app={app} config={config} levelComponents={level.components} key={level.id} />
+      ))}
       <Player entityManager={entityManager} />
     </>
   )

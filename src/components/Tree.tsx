@@ -13,15 +13,14 @@ type Props = {
   position: TPosition
 }
 
-function Tree({entityManager, texture, position, size}: Props) {
+function Tree({ entityManager, texture, position, size }: Props) {
 
   useEffect(() => {
     const treeEntity = entityManager.createEntity(5)
     treeEntity.addComponent(new TextureComponent(texture))
     treeEntity.addComponent(new PositionComponent(position.x, position.y - size.height))
     treeEntity.addComponent(new SizeComponent(size.width, size.height))
-    treeEntity.addComponent(new RenderComponent({texture, height: size.height, width: size.width}))
-    console.log(treeEntity)
+    treeEntity.addComponent(new RenderComponent({ texture, height: size.height, width: size.width }))
   }, [])
   return <></>
 }

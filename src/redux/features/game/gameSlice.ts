@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { TPlayer } from '../../../config/types'
 import { RootState } from '../../store'
-import { player1 } from '../../../mocks/player'
+import { EGameState } from '../../../config/types'
 
 const initialState = {
-  isPlayerSet: false
+  isPlayerSet: false,
+  currentState: EGameState.MENU_MAIN
 }
 
 export const game = createSlice({
@@ -12,16 +12,19 @@ export const game = createSlice({
   initialState,
   reducers: {
     setPlayer: (state: typeof initialState, action: PayloadAction<boolean>) => {
-      return {
-        isPlayerSet: action.payload
-      }
+      state.isPlayerSet = action.payload
+    },
+
+    setCurrentState: (state: typeof initialState, action: PayloadAction<EGameState>) => {
+      state.currentState = action.payload
     },
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { setPlayer } = game.actions
+export const { setPlayer, setCurrentState } = game.actions
 export const selectIsPlayerSet = (state: RootState) => state.game.isPlayerSet
+export const selectGame = (state: RootState) => state.game
 
 
 export default game.reducer

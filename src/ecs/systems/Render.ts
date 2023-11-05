@@ -1,9 +1,13 @@
+import { selectPuzzlePiece } from "../../redux/features/module/modulesSlice";
+import { store } from "../../redux/store";
+import { CanBePicked } from "../components/CanBePicked";
 import { PositionComponent } from "../components/Position";
 import { RenderComponent } from "../components/Render";
 import { EntityManager } from "../entity/EntityManager";
 
 export class RenderSystem {
   entityManager: EntityManager
+  stage: any
   constructor(entityManager: EntityManager, stage) {
     this.entityManager = entityManager;
     this.stage = stage;
@@ -15,12 +19,19 @@ export class RenderSystem {
     entities.forEach(entity => {
       const renderComponent = entity.getComponent(RenderComponent);
 
-      // Update the graphics based on the entity's position
       renderComponent.sprite.position.x = entity.getComponent(PositionComponent).x;
       renderComponent.sprite.position.y = entity.getComponent(PositionComponent).y;
 
-      // Render the graphics on the stage
       this.stage.addChild(renderComponent.sprite);
+
+      if (entity.hasComponent(CanBePicked)) {
+        const puzzle = selectPuzzlePiece(entity.getComponent(CanBePicked).id)(store.getState())
+        if (puzzle.found) this.stage.removeChild(renderComponent.sprite)
+      }
     });
+  }
+
+  destroy() {
+    this.stage.removeChildren()
   }
 }

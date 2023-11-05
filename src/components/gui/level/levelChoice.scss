@@ -1,0 +1,20 @@
+.level_choice__container {
+  display: flex;
+  background-color: black;
+  color: white;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 5;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  font-size: 2.5rem;
+
+  .level_choice__levels__container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}

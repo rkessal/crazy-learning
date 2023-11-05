@@ -1,10 +1,25 @@
 import { TFormation, TModule } from "../config/types";
-import dummyFile from "/files/dummyFile1.pdf"
 
 export const modules: TModule[] = [
   {
     id: 'mod1',
     title: 'module 1',
+    completed: false,
+    lastFoundSupport: null,
+    puzzlePieces: [
+      {
+        id: 'puzzle1',
+        found: false
+      },
+      {
+        id: 'puzzle2',
+        found: false
+      },
+      {
+        id: 'puzzle3',
+        found: false
+      }
+    ],
     supports: [
       {
         id: 'supp1',
@@ -23,6 +38,9 @@ export const modules: TModule[] = [
   {
     id: 'mod2',
     title: 'module 2',
+    completed: false,
+    lastFoundSupport: null,
+    puzzlePieces: [],
     supports: [
       {
         id: 'supp3',
@@ -30,12 +48,6 @@ export const modules: TModule[] = [
         found: false,
         file: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
       },
-      {
-        id: 'supp4',
-        label: 'support 2',
-        found: false,
-        file: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
-      }
     ]
   }
 ]

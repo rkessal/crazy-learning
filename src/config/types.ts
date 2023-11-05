@@ -1,3 +1,14 @@
+import { CanStandOnTopComponent } from "../ecs/components/CanStandOnTop"
+import { FileComponent } from "../ecs/components/File"
+import { GravityComponent } from "../ecs/components/Gravity"
+import { MoveWithInputComponent } from "../ecs/components/MoveWithInput"
+import { PositionComponent } from "../ecs/components/Position"
+import { RenderComponent } from "../ecs/components/Render"
+import { SizeComponent } from "../ecs/components/Size"
+import { StateComponent } from "../ecs/components/State"
+import { TextureComponent } from "../ecs/components/Texture"
+import { VelocityComponent } from "../ecs/components/Velocity"
+
 export type TPosition = {
   x: number,
   y: number
@@ -11,8 +22,16 @@ export type TSize = {
 export type TModule = {
   id: string
   title: string
+  completed: boolean
   supports: TSupport[]
+  lastFoundSupport: TSupport | null
+  puzzlePieces: TPuzzlePiece[]
   timer?: number
+}
+
+export type TPuzzlePiece = {
+  id: string
+  found: boolean
 }
 
 export type TSupport = {
@@ -34,3 +53,42 @@ export type TPlayer = {
   height: number,
   width: number
 }
+
+export type TLevel = {
+  id: string
+  label: string
+  unlocked: boolean
+  nextLevelId: string | null
+  rating: number
+  components: any[]
+}
+
+export type TLevels = {
+  current: TLevel['id']
+  levels: TLevel[]
+}
+
+export enum EComponentType {
+  GROUND = 'GROUND',
+  BOX = 'BOX',
+  TREE = 'TREE',
+  PUZZLE = 'PUZZLE'
+}
+
+export enum EGameState {
+  GAME_PLAYING = 'GAME_PLAYING',
+  MENU_MAIN = 'MENU_MAIN',
+  MENU_SELECT_PLAYER = 'MENU_SELECT_PLAYER',
+  MENU_SELECT_LEVEL = 'MENU_SELECT_LEVEL',
+}
+
+export type Component = CanStandOnTopComponent
+  | FileComponent
+  | GravityComponent
+  | MoveWithInputComponent
+  | PositionComponent
+  | RenderComponent
+  | SizeComponent
+  | StateComponent
+  | TextureComponent
+  | VelocityComponent

@@ -1,4 +1,4 @@
-import { TPlayer } from "../config/types"
+import { TLevel, TPlayer } from "../config/types"
 import playerImg from "../assets/player.png"
 import playerImg2 from "../assets/player2.png"
 import playerImg3 from "../assets/player3.png"

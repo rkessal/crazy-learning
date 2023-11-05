@@ -1,9 +1,9 @@
-import "./playerChoix.scss"
-import { TPlayer } from "../../../config/types"
+import "./playerChoice.scss"
+import { EGameState, TPlayer } from "../../../config/types"
 import { player1, player2, player3 } from "../../../mocks/player"
 import { choosePlayer } from "../../../redux/features/player/playerSlice"
 import { useAppDispatch } from "../../../redux/hooks"
-import { setPlayer } from "../../../redux/features/game/gameSlice"
+import { setCurrentState, setPlayer } from "../../../redux/features/game/gameSlice"
 
 type Props = {}
 
@@ -13,7 +13,7 @@ function PlayerChoice({ }: Props) {
   const dispatch = useAppDispatch()
   const choosePLayer = (player: TPlayer) => {
     dispatch(choosePlayer(player))
-    dispatch(setPlayer(true))
+    dispatch(setCurrentState(EGameState.MENU_SELECT_LEVEL))
   }
   return (
     <div className="player_choice__container bangers">

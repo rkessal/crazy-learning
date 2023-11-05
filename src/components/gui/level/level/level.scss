@@ -1,0 +1,48 @@
+.level__wrapper {
+  position: relative;
+  padding: 2rem;
+  height: 6rem;
+  width: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+
+  &:hover {
+    cursor: pointer;
+    transform: translateY(-0.3rem);
+    transition: ease-in-out;
+    transition-duration: 200ms;
+  }
+
+  .level__background__img {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .level__lock {
+    height: 90%;
+    width: 90%;
+    object-fit: contain;
+    z-index: 2;
+  }
+
+  .level__number {
+    z-index: 2;
+
+    .level__stars__wrapper {
+
+      .level__star {}
+    }
+
+  }
+}

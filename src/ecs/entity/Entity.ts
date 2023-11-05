@@ -1,7 +1,6 @@
 export class Entity {
-  id: number
-  constructor(id) {
-    this.id = id
+  components
+  constructor() {
     this.components = {};
   }
 

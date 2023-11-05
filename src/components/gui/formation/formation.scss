@@ -1,13 +1,14 @@
 .formation__container {
   display: flex;
   flex-direction: column;
-  padding: 1em;
+  padding: 1rem;
+  width: 15rem;
 
   .formation__item {
-    margin-top: 0.4em;
+    margin-top: 0.4rem;
 
     &:not(:last-child) {
-      margin-bottom: 0.2em;
+      margin-bottom: 0.2rem;
     }
 
     .formation__item__label {

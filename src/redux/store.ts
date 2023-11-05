@@ -1,15 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
-import supportsReducer from './features/module/supportsSlice'
 import modulesReducer from './features/module/modulesSlice'
 import playerReducer from './features/player/playerSlice'
 import gameReducer from './features/game/gameSlice'
+import levelReducer from './features/level/levelSlice'
 
 export const store = configureStore({
   reducer: {
     modules: modulesReducer,
-    supports: supportsReducer,
     player: playerReducer,
     game: gameReducer,
+    level: levelReducer,
   }
 })
 

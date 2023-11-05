@@ -12,11 +12,11 @@ export class GravitySystem {
   screen: any
   constructor(entityManager: EntityManager, screen) {
     this.entityManager = entityManager
-    this.gravity = 0.2
+    this.gravity = 1.5
     this.screen = screen
   }
 
-  update() {
+  update(delta) {
     const entities = this.entityManager.getEntitiesWithComponents(GravityComponent)
 
     entities.forEach((entity) => {
@@ -26,17 +26,12 @@ export class GravitySystem {
 
       const positionComponent = entity.getComponent(PositionComponent)
       const sizeComponent = entity.getComponent(SizeComponent)
-      if (positionComponent.y + sizeComponent.height + velocityComponent.y < this.screen.height && stateComponent.state !== EntityState.GROUNDED) {
-        if (velocityComponent.y <= config.MAX_FALLING_VELOCITY) velocityComponent.y += this.gravity
-        positionComponent.y += velocityComponent.y
-        stateComponent.state = EntityState.JUMPING
+      if (positionComponent.y + sizeComponent.height + velocityComponent.y * delta < this.screen.height) {
+        velocityComponent.y = velocityComponent.y * delta + this.gravity
       } else {
         velocityComponent.y = 0
-        stateComponent.state = null
+        stateComponent.state = EntityState.GROUNDED
       }
-
-      if (positionComponent.y + sizeComponent.height >= this.screen.height) positionComponent.y = this.screen.height - sizeComponent.height
-
     })
   }
 }

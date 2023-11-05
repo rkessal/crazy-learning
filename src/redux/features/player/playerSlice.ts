@@ -9,13 +9,12 @@ export const playerSlice = createSlice({
   name: 'player',
   initialState,
   reducers: {
-    choosePlayer: (state: TPlayer, action: PayloadAction<TPlayer>) => {
+    choosePlayer: (_: TPlayer, action: PayloadAction<TPlayer>) => {
       return action.payload
     },
   }
 })
 
-// Action creators are generated for each case reducer function
 export const { choosePlayer } = playerSlice.actions
 export const selectPlayer = (state: RootState) => state.player
 

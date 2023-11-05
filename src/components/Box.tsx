@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { EntityManager } from '../ecs/entity/EntityManager'
 import { PositionComponent } from '../ecs/components/Position'
 import { RenderComponent } from '../ecs/components/Render'

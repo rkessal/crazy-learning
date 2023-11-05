@@ -8,7 +8,7 @@ export class VelocitySystem {
     this.entityManager = entityManager
   }
 
-  update() {
+  update(delta) {
     const entities = this.entityManager.getEntitiesWithComponents(VelocityComponent)
 
     entities.forEach((entity) => {
@@ -16,8 +16,8 @@ export class VelocitySystem {
       const positionComponent = entity.getComponent(PositionComponent)
       if (!velocityComponent) return
 
-      positionComponent.x += velocityComponent.x
-      positionComponent.y += velocityComponent.y
+      positionComponent.x += velocityComponent.x * delta
+      positionComponent.y += velocityComponent.y * delta
     })
   }
 }

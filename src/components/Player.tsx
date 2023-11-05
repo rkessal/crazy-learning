@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { EntityManager } from '../ecs/entity/EntityManager'
 import { StateComponent, EntityState } from '../ecs/components/State'
 import { GravityComponent } from '../ecs/components/Gravity'
@@ -8,8 +8,6 @@ import { RenderComponent } from '../ecs/components/Render'
 import { SizeComponent } from '../ecs/components/Size'
 import { TextureComponent } from '../ecs/components/Texture'
 import { VelocityComponent } from '../ecs/components/Velocity'
-
-import playerImg from "../assets/player.png"
 import { useAppSelector } from '../redux/hooks'
 import { selectPlayer } from '../redux/features/player/playerSlice'
 
@@ -29,7 +27,7 @@ function Player({ entityManager, }: Props) {
     playerEntity.addComponent(new MoveWithInputComponent());
     playerEntity.addComponent(new VelocityComponent())
     playerEntity.addComponent(new GravityComponent())
-    playerEntity.addComponent(new StateComponent(EntityState.GROUNDED))
+    playerEntity.addComponent(new StateComponent(null))
   }, [])
   return (
     <></>
