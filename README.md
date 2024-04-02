@@ -10,7 +10,7 @@ L'application est divisée en 3 parties:
 - Le store Redux + API
 
 ## La partie front end
-Tous les composants se trouvent dans le dosser 'components'. Il contient les components 'Interface Utilisateur' et les 'Sprite' (elements graphiques du jeu)
+Tous les composants se trouvent dans le dossier 'components'. Il contient les components 'Interface Utilisateur' et les 'Sprite' (elements graphiques du jeu)
 
 ## L'ECS (Entity Component System)
 Le jeu est basé sur l'architecture [ECS](https://en.wikipedia.org/wiki/Entity_component_system).
