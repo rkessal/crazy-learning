@@ -30,7 +30,12 @@ export class GravitySystem {
         velocityComponent.y = velocityComponent.y * delta + this.gravity
       } else {
         velocityComponent.y = 0
-        stateComponent.state = EntityState.GROUNDED
+
+        if (stateComponent.state === EntityState.JUMPING_LEFT || stateComponent.state === EntityState.RUNNING_LEFT) {
+          stateComponent.state = EntityState.STANDING_LEFT
+        } else {
+          stateComponent.state = EntityState.STANDING_RIGHT
+        }
       }
     })
   }

@@ -26,9 +26,7 @@ function Puzzle({ entityManager, id, texture, size, position }: Props) {
     puzzeEntity.addComponent(new CanBePicked(id))
   }, [])
 
-  return (
-    <div>Puzzle</div>
-  )
+  return <></>
 }
 
 export default Puzzle

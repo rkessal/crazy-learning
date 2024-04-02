@@ -1,20 +1,19 @@
-import { EntityState, StateComponent } from "../components/State";
+import { StateComponent } from "../components/State";
 import { PositionComponent } from "../components/Position";
 import { SizeComponent } from "../components/Size";
 import { VelocityComponent } from "../components/Velocity";
 import { EntityManager } from "../entity/EntityManager";
 import { CanStandOnTopComponent } from "../components/CanStandOnTop";
 import { FileComponent } from "../components/File";
-import { Test } from "../../test";
 import { store } from "../../redux/store";
 import { setFound, setFoundPuzzle } from "../../redux/features/module/modulesSlice";
+import { promptSubModule, removePromptSubModule } from "../../redux/features/game/gameSlice";
 import { CanBePicked } from "../components/CanBePicked";
+import { CanGoThrough } from "../components/CanGoTrough";
 
 export class CollisionSytem {
   entityManager: EntityManager
   threshold = 0
-  test = new Test()
-
   constructor(entityManager: EntityManager) {
     this.entityManager = entityManager;
   }
@@ -31,7 +30,6 @@ export class CollisionSytem {
       entities.forEach((entity2) => {
         if (entity1 === entity2) return
 
-
         if (!entity1.hasComponent(VelocityComponent)) return
 
         const position2 = entity2.getComponent(PositionComponent)
@@ -45,9 +43,24 @@ export class CollisionSytem {
           if (entity2.hasComponent(CanBePicked)) {
             store.dispatch(setFoundPuzzle(entity2.getComponent(CanBePicked).id))
           }
-
-        }
-
+          if (entity2.hasComponent(CanGoThrough)) {
+            const { promptSubmodule } = store.getState().game
+            const currentPrompt = promptSubmodule.id
+            const canGoThroughComponent = entity2.getComponent(CanGoThrough)
+            if (currentPrompt !== canGoThroughComponent.id) {
+              store.dispatch(promptSubModule(canGoThroughComponent.id))
+            }
+          }
+        } else {
+          if (entity2.hasComponent(CanGoThrough)) {
+            const { promptSubmodule } = store.getState().game
+            const currentPrompt = promptSubmodule.id
+            const canGoThroughComponent = entity2.getComponent(CanGoThrough)
+            if (currentPrompt === canGoThroughComponent.id) {
+              store.dispatch(removePromptSubModule(canGoThroughComponent.id))
+            }
+          }
+        } 
 
         if (
           position1.y + size1.height <= position2.y &&
@@ -62,7 +75,6 @@ export class CollisionSytem {
               store.dispatch(setFound(entity2.getComponent(FileComponent).id))
             }
             velocity.y = 0
-            state.state = EntityState.GROUNDED
           }
         }
       })

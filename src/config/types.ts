@@ -49,8 +49,16 @@ export type TFormation = {
 
 export type TPlayer = {
   name: string
-  texture: string
-  height: number,
+  image: string
+  texture: {
+    jumping_left?: string
+    jumping_right?: string
+    running_left: string
+    running_right: string
+    standing_left: string
+    standing_right: string
+  }
+  height: number
   width: number
 }
 
@@ -72,7 +80,9 @@ export enum EComponentType {
   GROUND = 'GROUND',
   BOX = 'BOX',
   TREE = 'TREE',
-  PUZZLE = 'PUZZLE'
+  PUZZLE = 'PUZZLE',
+  SCENERY = 'SCENERY',
+  DOOR = 'DOOR'
 }
 
 export enum EGameState {
@@ -80,6 +90,11 @@ export enum EGameState {
   MENU_MAIN = 'MENU_MAIN',
   MENU_SELECT_PLAYER = 'MENU_SELECT_PLAYER',
   MENU_SELECT_LEVEL = 'MENU_SELECT_LEVEL',
+}
+
+export type TAnimation = {
+  name: string
+  src: string
 }
 
 export type Component = CanStandOnTopComponent

@@ -3,15 +3,23 @@
 body {
   margin: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  background: black;
 }
 
 .bangers {
   font-family: 'Bangers';
 }
 
+.app {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  margin-inline: auto;
+}
+
 canvas {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }

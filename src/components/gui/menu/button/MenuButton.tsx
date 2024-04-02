@@ -6,7 +6,7 @@ type Props = {
 
 function MenuButton({ onClick, children }: Props) {
   return (
-    <div className="menu_button bangers">
+    <div className="menu_button">
       <span onClick={onClick}>{children}</span>
       <img src="assets/button-texture.png" />
     </div>

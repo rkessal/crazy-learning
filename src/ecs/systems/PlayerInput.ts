@@ -35,17 +35,33 @@ export class PlayerInputSystem {
 
       if (this.keys['a']) {
         velocityComponent.x = -config.RUN_VELOCITY * deltaTime;
-        stateComponent.state = EntityState.RUNNING
+        if (velocityComponent.y < 1.5) {
+          stateComponent.state = EntityState.JUMPING_LEFT
+        } else {
+          stateComponent.state = EntityState.RUNNING_LEFT
+        }
       }
       if (this.keys['d']) {
         velocityComponent.x = config.RUN_VELOCITY * deltaTime;
-        stateComponent.state = EntityState.RUNNING
+        if (velocityComponent.y < 1.5) {
+          stateComponent.state = EntityState.JUMPING_RIGHT
+        } else {
+          stateComponent.state = EntityState.RUNNING_RIGHT
+        }
       }
       if (this.keys['w']) {
         velocityComponent.y = -config.JUMP_VELOCITY * deltaTime;
       }
 
-      if (velocityComponent.x >= -0.5 && velocityComponent.x <= 0.5) velocityComponent.x = 0
+      if (velocityComponent.x >= -0.5 && velocityComponent.x <= 0.5) {
+        velocityComponent.x = 0
+        if (stateComponent.state === EntityState.JUMPING_LEFT || stateComponent.state === EntityState.RUNNING_LEFT) {
+          stateComponent.state = EntityState.STANDING_LEFT
+        }
+        if (stateComponent.state === EntityState.JUMPING_RIGHT || stateComponent.state === EntityState.RUNNING_RIGHT) {
+          stateComponent.state = EntityState.STANDING_RIGHT
+        }
+      }
       velocityComponent.x -= velocityComponent.x * this.smoothingFactor
     });
   }

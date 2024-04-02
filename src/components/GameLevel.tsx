@@ -5,6 +5,8 @@ import Tree from './Tree'
 
 import { EComponentType, TLevel } from '../config/types'
 import Puzzle from './Puzzle'
+import Scenery from './Scenery'
+import Door from './Door'
 
 type Props = {
   entityManager: EntityManager
@@ -19,13 +21,19 @@ const renderLevelComponent = (component, ground, entityManager, screenHeight) =>
       return <Box entityManager={entityManager} id={component.id} position={{ ...component.position, y: screenHeight - ground }} size={component.size} texture={`assets/${component.texture}`} key={component.id} />
 
     case EComponentType.GROUND:
-      return <Ground entityManager={entityManager} position={{ ...component.position, y: screenHeight - ground }} size={{ ...component.size, height: ground }} texture={`assets/${component.texture}`} key={component.id} />
+      return <Ground entityManager={entityManager} position={{ ...component.position, y: component.position.y !== -1 ? component.position.y : screenHeight - component.size.height }} size={component.size} texture={`assets/${component.texture}`} key={component.id} />
 
     case EComponentType.TREE:
       return <Tree entityManager={entityManager} position={{ ...component.position, y: screenHeight - ground }} size={{ ...component.size, y: ground }} texture={`assets/${component.texture}`} key={component.id} />
 
     case EComponentType.PUZZLE:
       return <Puzzle entityManager={entityManager} id={component.id} position={{ ...component.position, y: screenHeight - ground }} size={{ ...component.size, y: ground }} texture={`assets/${component.texture}`} key={component.id} />
+
+    case EComponentType.SCENERY:
+      return <Scenery entityManager={entityManager} id={component.id} position={component.position} size={component.size} texture={`assets/${component.texture}`} key={component.id} />
+
+    case EComponentType.DOOR:
+      return <Door entityManager={entityManager} id={component.id} position={component.position} size={component.size} texture={`assets/${component.texture}`} key={component.id} />
 
     default:
       break;

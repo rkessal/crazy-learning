@@ -1,24 +1,27 @@
 import './supports.scss'
 import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
-import { selectModules, setModules, selectFoundSupportsCount, selectModule } from '../../../redux/features/module/modulesSlice'
+import { selectModules, setModules, selectFoundSupportsCount } from '../../../redux/features/module/modulesSlice'
 import Popup from '../popup/Popup'
+import { Application } from 'pixi.js'
 
 
 type Props = {
+  app: Application
 }
 
-function Supports({ }: Props) {
+function Supports({ app }: Props) {
   const foundSupportsCount = useAppSelector(selectFoundSupportsCount)
   const modules = useAppSelector(selectModules)
   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    dispatch(setModules(modules))
-  }, [])
-
   const [isMenuOpened, setIsMenuOpened] = useState(false)
   const toggleMenu = () => setIsMenuOpened((prev) => !prev)
+
+  useEffect(() => {
+    // dispatch(setModules(modules))
+  }, [])
+
   return (
     <div className='supports__container'>
       <>
@@ -26,7 +29,7 @@ function Supports({ }: Props) {
           <img src="assets/button-texture.png" alt="" />
         </div>
         <div className='supports__menu' onClick={toggleMenu}>{foundSupportsCount} support(s) trouvé(s)</div>
-        {isMenuOpened && <Popup close={toggleMenu}>{
+        {isMenuOpened && <Popup close={toggleMenu} app={app}>{
           modules.map((module) => (
             <div className='supports__module'>
               <>

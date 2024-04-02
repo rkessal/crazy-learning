@@ -17,7 +17,7 @@ function LevelChoice({ }: Props) {
   }
 
   return (
-    <div className="level_choice__container bangers">
+    <div className="level_choice__container">
       <div className="level_choice__label">
         Selectionne ton niveau
       </div>

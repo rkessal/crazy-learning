@@ -16,15 +16,15 @@ function PlayerChoice({ }: Props) {
     dispatch(setCurrentState(EGameState.MENU_SELECT_LEVEL))
   }
   return (
-    <div className="player_choice__container bangers">
+    <div className="player_choice__container">
       <div className="player_choice__label">
         Selectionne ton joueur
       </div>
       <div className="player_choice__content">
         {players.map(player => (
-          <div className="player_choice__player">
+          <div key={player.name} className="player_choice__player">
             <div className="player_choice__player__img">
-              <img onClick={() => choosePLayer(player)} src={player.texture} alt="" />
+              <img onClick={() => choosePLayer(player)} src={player.image} alt="" />
             </div>
             <div className="player_choice__player__label">{player.name}</div>
           </div>

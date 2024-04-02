@@ -6,20 +6,44 @@ import playerImg3 from "../assets/player3.png"
 
 export const player1: TPlayer = {
   name: 'Le mineur',
-  texture: playerImg,
+  image: playerImg,
+  texture: {
+    running_left: '/assets/spritesheets/player1/player1_running_left-1.json',
+    running_right: '/assets/spritesheets/player1/player1_running_right-1.json',
+    standing_left: '/assets/spritesheets/player1/player1_standing_left-1.json',
+    standing_right: '/assets/spritesheets/player1/player1_standing_right-1.json',
+    jumping_left: '/assets/spritesheets/player1/player1_jumping_left-1.json',
+    jumping_right: '/assets/spritesheets/player1/player1_jumping_right-1.json'
+  },
   height: 189,
   width: 96
 }
 
 export const player2: TPlayer = {
   name: 'L\'homme des cavernes',
-  texture: playerImg2,
+  image: playerImg2,
+  texture: {
+    running_left: '/assets/spritesheets/player1/player1_running_left-1.json',
+    running_right: '/assets/spritesheets/player1/player1_running_right-1.json',
+    standing_left: '/assets/spritesheets/player1/player1_standing_left-1.json',
+    standing_right: '/assets/spritesheets/player1/player1_standing_right-1.json',
+    jumping_left: '/assets/spritesheets/player1/player1_jumping_left-1.json',
+    jumping_right: '/assets/spritesheets/player1/player1_jumping_right-1.json'
+  },
   height: 189,
   width: 96
 }
 export const player3: TPlayer = {
   name: 'Le père noel',
-  texture: playerImg3,
+  image: playerImg3,
+  texture: {
+    running_left: '/assets/spritesheets/player1/player1_running_left-1.json',
+    running_right: '/assets/spritesheets/player1/player1_running_right-1.json',
+    standing_left: '/assets/spritesheets/player1/player1_standing_left-1.json',
+    standing_right: '/assets/spritesheets/player1/player1_standing_right-1.json',
+    jumping_left: '/assets/spritesheets/player1/player1_jumping_left-1.json',
+    jumping_right: '/assets/spritesheets/player1/player1_jumping_right-1.json'
+  },
   height: 189,
   width: 96
 }

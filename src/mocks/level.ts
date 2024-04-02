@@ -8,61 +8,124 @@ export const level1: TLevel = {
   rating: 3,
   components: [
     {
+      id: 'door3',
+      type: EComponentType.DOOR,
+      size: { height: 150, width: 221 },
+      position: { x: 1700, y: 522 },
+      texture: 'PorteSousModuleTrois.webp'
+    },
+    {
+      id: 'door4',
+      type: EComponentType.DOOR,
+      size: { height: 197, width: 170 },
+      position: { x: 962, y: 220 },
+      texture: 'PorteSousModuleQuattre.webp'
+    },
+    {
+      id: 'ground3',
+      type: EComponentType.GROUND,
+      size: { height: 71, width: 183 },
+      position: { x: 1447, y: 560 },
+      texture: 'PlateformeCinqModuleUn.webp'
+    },
+    {
+      id: 'ground4',
+      type: EComponentType.GROUND,
+      size: { height: 71, width: 183 },
+      position: { x: 1398, y: 738 },
+      texture: 'PlateformeCinqModuleUn.webp'
+    },
+    {
+      id: 'ground7',
+      type: EComponentType.GROUND,
+      size: { height: 71, width: 183 },
+      position: { x: 1251, y: 469 },
+      texture: 'PlateformeCinqModuleUn.webp'
+    },
+    {
+      id: 'ground6',
+      type: EComponentType.GROUND,
+      size: { height: 271, width: 444 },
+      position: { x: 1651, y: 657 },
+      texture: 'PlateformeSeptModuleUn.webp'
+    },
+    {
+      id: 'ground5',
+      type: EComponentType.GROUND,
+      size: { height: 676, width: 1217 },
+      position: { x: 0, y: 407 },
+      texture: 'PlateformeSixModuleUn.png'
+    },
+    {
+      id: 'door1',
+      type: EComponentType.DOOR,
+      size: { height: 217, width: 179 },
+      position: { x: 183, y: 610 },
+      texture: 'PorteSousModuleUn.webp'
+    },
+    {
+      id: 'door2',
+      type: EComponentType.DOOR,
+      size: { height: 168, width: 278 },
+      position: { x: 713, y: 645 },
+      texture: 'PorteSousModuleDeux.webp'
+    },
+    {
       id: 'ground1',
       type: EComponentType.GROUND,
-      size: { height: -1, width: 742 },
+      size: { height: 271, width: 444 },
       position: { x: 0, y: -1 },
-      texture: 'terrain.png'
+      texture: 'PlateformeUnModuleUn.png'
     },
     {
       id: 'ground2',
       type: EComponentType.GROUND,
-      size: { height: -1, width: 742 },
-      position: { x: 741, y: -1 },
-      texture: 'terrain.png'
+      size: { height: 271, width: 738 },
+      position: { x: 584, y: -1 },
+      texture: 'PlateformeDeuxModuleUn.png'
     },
-    {
-      id: 'tree1',
-      type: EComponentType.TREE,
-      size: { width: 140, height: 233 },
-      position: { x: 200, y: 0 },
-      texture: 'tree.png'
-    },
-    {
-      id: 'supp1',
-      type: EComponentType.BOX,
-      size: { height: 118, width: 129 },
-      position: { x: 500, y: 0 },
-      texture: 'box-1.png'
-    },
-    {
-      id: 'supp2',
-      type: EComponentType.BOX,
-      size: { height: 118, width: 129 },
-      position: { x: 700, y: 0 },
-      texture: 'box-1.png'
-    },
-    {
-      id: 'puzzle1',
-      type: EComponentType.PUZZLE,
-      size: { height: 100, width: 100 },
-      position: { x: 100, y: 0 },
-      texture: 'puzzle.png'
-    },
-    {
-      id: 'puzzle2',
-      type: EComponentType.PUZZLE,
-      size: { height: 100, width: 100 },
-      position: { x: 200, y: 0 },
-      texture: 'puzzle.png'
-    },
-    {
-      id: 'puzzle3',
-      type: EComponentType.PUZZLE,
-      size: { height: 100, width: 100 },
-      position: { x: 300, y: 0 },
-      texture: 'puzzle.png'
-    },
+    // {
+    //   id: 'tree1',
+    //   type: EComponentType.TREE,
+    //   size: { width: 140, height: 233 },
+    //   position: { x: 200, y: 0 },
+    //   texture: 'tree.png'
+    // },
+    // {
+    //   id: 'supp1',
+    //   type: EComponentType.BOX,
+    //   size: { height: 118, width: 129 },
+    //   position: { x: 500, y: 0 },
+    //   texture: 'box-1.png'
+    // },
+    // {
+    //   id: 'supp2',
+    //   type: EComponentType.BOX,
+    //   size: { height: 118, width: 129 },
+    //   position: { x: 700, y: 0 },
+    //   texture: 'box-1.png'
+    // },
+    // {
+    //   id: 'puzzle1',
+    //   type: EComponentType.PUZZLE,
+    //   size: { height: 100, width: 100 },
+    //   position: { x: 100, y: 0 },
+    //   texture: 'puzzle.png'
+    // },
+    // {
+    //   id: 'puzzle2',
+    //   type: EComponentType.PUZZLE,
+    //   size: { height: 100, width: 100 },
+    //   position: { x: 200, y: 0 },
+    //   texture: 'puzzle.png'
+    // },
+    // {
+    //   id: 'puzzle3',
+    //   type: EComponentType.PUZZLE,
+    //   size: { height: 100, width: 100 },
+    //   position: { x: 300, y: 0 },
+    //   texture: 'puzzle.png'
+    // },
   ]
 }
 

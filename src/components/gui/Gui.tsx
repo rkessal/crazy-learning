@@ -9,12 +9,17 @@ import LevelChoice from './level/LevelChoice'
 import Menu from './menu/Menu'
 import { EGameState } from '../../config/types'
 import { selectCurrentLevel, unlockLevel } from '../../redux/features/level/levelSlice'
-import { selectLastFoundSupport, selectModule } from '../../redux/features/module/modulesSlice'
+import { selectAllPuzzlePiecesFound, selectLastFoundSupport, selectModule } from '../../redux/features/module/modulesSlice'
 import { useEffect, useState } from 'react'
 import LevelCompleted from './level/completed/LevelCompleted'
 import SupportFound from './supports/found/SupportFound'
+import Popup from './popup/Popup'
+import { Application } from 'pixi.js'
+import LevelFound from './level/found/LevelFound'
 
-type Props = {}
+type Props = {
+  app: Application
+}
 
 const gameMap = {
   [EGameState.MENU_MAIN]: <Menu />,
@@ -22,42 +27,51 @@ const gameMap = {
   [EGameState.MENU_SELECT_PLAYER]: <PlayerChoice />
 }
 
-function Gui({ }: Props) {
+function Gui({ app }: Props) {
   const gameState = useAppSelector(selectGame)
   const currentLevel = useAppSelector(selectCurrentLevel)
   const currentModule = useAppSelector(selectModule(currentLevel.id))
   const lastFoundSupport = useAppSelector(selectLastFoundSupport(currentLevel.id))
+  const allPuzzlePiecesFound = useAppSelector(selectAllPuzzlePiecesFound(currentModule.id))
 
   const dispatch = useAppDispatch()
 
-  const [displayPopup, setDisplayPopup] = useState(false)
+  const [displayPopupModuleFound, setDisplayPopupModuleFound] = useState(false)
+  const [displayPopupAllPuzzlePiecesFound, setDisplayPopupAllPuzzlePiecesFound] = useState(false)
 
-  const closePopup = () => setDisplayPopup(false)
+  const closePopupModuleFound = () => setDisplayPopupModuleFound(false)
+  const closePopupAllPuzzlePiecesFound = () => setDisplayPopupAllPuzzlePiecesFound(false)
 
-  useEffect(() => {
-    console.log(currentModule.puzzlePieces)
-  }, [currentModule])
+  const { promptSubmodule } = gameState
 
   useEffect(() => {
     currentModule.completed && dispatch(unlockLevel(currentLevel.nextLevelId))
   }, [currentModule.completed])
 
-
+  useEffect(() => {
+    setDisplayPopupModuleFound(true)
+  }, [lastFoundSupport])
 
   useEffect(() => {
-    setDisplayPopup(true)
-  }, [lastFoundSupport])
+    setDisplayPopupAllPuzzlePiecesFound(true)
+  }, [allPuzzlePiecesFound])
+
+  useEffect(() => {
+    console.log({promptSubmodule})
+  }, [promptSubmodule])
 
   return (
     <>
       {gameMap[gameState.currentState]}
       {gameState.currentState === EGameState.GAME_PLAYING && (
         <div className="gui__container">
-          <Supports />
-          <Formation formation={formation} module={currentModule} />
+          <Supports app={app} />
+          <Formation app={app} formation={formation} module={currentModule} />
         </div>)}
       {currentModule.completed && <LevelCompleted />}
-      {lastFoundSupport && displayPopup && <SupportFound closePopup={closePopup} support={lastFoundSupport} />}
+      {lastFoundSupport && displayPopupModuleFound && <SupportFound app={app} closePopup={closePopupModuleFound} support={lastFoundSupport} />}
+      {allPuzzlePiecesFound && displayPopupAllPuzzlePiecesFound && <Popup app={app} close={closePopupAllPuzzlePiecesFound}>Tu as trouvé toutes les pièces de puzzle ! <a href='#'>Lien jeu des bombes</a></Popup >}
+      {promptSubmodule.state && <LevelFound id={promptSubmodule.id}  />}
     </>
   )
 }

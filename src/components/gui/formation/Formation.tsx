@@ -1,16 +1,19 @@
 import './formation.scss'
 import { useState } from "react"
 import { TFormation, TModule } from "../../../config/types"
+import { useAppSelector } from '../../../redux/hooks'
+import { selectPuzzlePieces } from '../../../redux/features/module/modulesSlice'
+import Popup from '../popup/Popup'
+import { Application } from 'pixi.js'
 
 type Props = {
   formation: TFormation,
   module: TModule
+  app: Application
 }
 
-function Formation({ formation, module }: Props) {
+function Formation({ formation, module, app }: Props) {
   const [isMenuOpened, setIsMenuOpened] = useState(false)
-  const [levelGrade, setLevelGrade] = useState(0)
-  const [generalGrade, setGeneralGrade] = useState(0)
 
   const toggleMenu = () => setIsMenuOpened((prev) => !prev)
 
@@ -18,11 +21,30 @@ function Formation({ formation, module }: Props) {
   const currentIndex = formation.modules.findIndex((m) => m.id === module.id) + 1
   const modulesLength = formation.modules.length
 
+  const puzzlePieces = useAppSelector(selectPuzzlePieces(module.id))
+
+  const totalFoundPuzzlePieces = puzzlePieces.reduce((count, piece) => piece.found ? count + 1 : count, 0)
+  const totalPuzzlePieces = puzzlePieces.length
+
   return (
     <div className='formation__container'>
-      <div onClick={toggleMenu}>12 - 05 H 24 min </div>
+      <div className="formation__background">
+        <img src="assets/button-texture.png" alt="" />
+      </div>
+      <div className="formation__menu" onClick={toggleMenu}>
+        <div className='formation__menu__timer'>
+          <div >12 - 05 H 24 min </div>
+        </div>
+        <div className="formation__menu__puzzlePieces">
+          <img src="assets/puzzle.png" alt="" />
+          <div>
+            {`${totalFoundPuzzlePieces}/${totalPuzzlePieces}`}
+          </div>
+        </div>
+      </div>
       {
-        isMenuOpened && (
+        isMenuOpened && <Popup close={toggleMenu} app={app}>
+
           <>
             <div className='formation__item'>
               <div className='formation__item__label'>Formation : </div>
@@ -45,7 +67,7 @@ function Formation({ formation, module }: Props) {
             <div>Niveau de difficulté : </div>
             <div>Satisfaction apprenant : </div>
           </>
-        )}
+        </Popup>}
     </div>
   )
 }

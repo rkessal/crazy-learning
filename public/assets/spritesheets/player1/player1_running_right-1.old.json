@@ -1,0 +1,146 @@
+{
+	"frames": {
+		"player1_running_right-1.png": {
+			"frame": {
+				"x": 0,
+				"y": 0,
+				"w": 216,
+				"h": 361
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 216,
+				"h": 361
+			},
+			"sourceSize": {
+				"w": 216,
+				"h": 361
+			}
+		},
+		"player1_running_right-2.png": {
+			"frame": {
+				"x": 216,
+				"y": 0,
+				"w": 229,
+				"h": 362
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 229,
+				"h": 362
+			},
+			"sourceSize": {
+				"w": 229,
+				"h": 362
+			}
+		},
+		"player1_running_right-3.png": {
+			"frame": {
+				"x": 445,
+				"y": 0,
+				"w": 244,
+				"h": 359
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 244,
+				"h": 359
+			},
+			"sourceSize": {
+				"w": 244,
+				"h": 359
+			}
+		},
+		"player1_running_right-4.png": {
+			"frame": {
+				"x": 689,
+				"y": 0,
+				"w": 262,
+				"h": 362
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 262,
+				"h": 362
+			},
+			"sourceSize": {
+				"w": 262,
+				"h": 362
+			}
+		},
+		"player1_running_right-5.png": {
+			"frame": {
+				"x": 951,
+				"y": 0,
+				"w": 245,
+				"h": 364
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 245,
+				"h": 364
+			},
+			"sourceSize": {
+				"w": 245,
+				"h": 364
+			}
+		},
+		"player1_running_right-6.png": {
+			"frame": {
+				"x": 1196,
+				"y": 0,
+				"w": 220,
+				"h": 361
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 220,
+				"h": 361
+			},
+			"sourceSize": {
+				"w": 220,
+				"h": 361
+			}
+		}
+	},
+	"animations": {
+		"running_right": [
+			"player1_running_right-1.png",
+			"player1_running_right-2.png",
+			"player1_running_right-3.png",
+			"player1_running_right-4.png",
+			"player1_running_right-5.png",
+			"player1_running_right-6.png"
+		]
+	},
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.1",
+		"image": "player1_running_right-1.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 1416,
+			"h": 364
+		},
+		"scale": "1",
+		"smartupdate": "$TexturePacker:SmartUpdate:7062b173be25a1ff42b64fb5a76cc05e:0326a2a20062d4ec87a5c0fb0e276915:5f71bc2335bf723dca2debcb010af7c6$"
+	}
+}
