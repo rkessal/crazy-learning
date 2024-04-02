@@ -1,27 +1,58 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Le projet a été créé avec vite et typescript.
 
-Currently, two official plugins are available:
+Pour lancer l'application en local : `npm run dev` ou `yarn dev`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+L'application est divisée en 3 parties:
+- La partie front end
+- L'ECS
+- Le store Redux + API
 
-## Expanding the ESLint configuration
+## La partie front end
+Tous les composants se trouvent dans le dosser 'components'. Il contient les components 'Interface Utilisateur' et les 'Sprite' (elements graphiques du jeu)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## L'ECS (Entity Component System)
+Le jeu est basé sur l'architecture [ECS](https://en.wikipedia.org/wiki/Entity_component_system).
+Le system est basé sur la [composition](https://en.wikipedia.org/wiki/Composition_over_inheritance).
+Les entités (joueur, plateformes, portes etc...) contiennent seulement un Id et sont gérées par un [Entity Manager](src/ecs/entity/EntityManager.ts). 
 
-- Configure the top-level `parserOptions` property like this:
+`const entityManager = new EntityManager()` (singleton)
+Pour créer une entité : `const entity = entityManager.createEntity(id)`.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+On peut ensuite ajouter des 'components' a ces entités, par ex: `entity.addComponent(Gravity)`.
+Les components contiennent seulement de la data, aucune logique.
+Par ex:
+```
+export class SizeComponent {
+  width: number
+  height: number
+  constructor(width: number, height: number) {
+    this.width = width
+    this.height = height
+  }
+}
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Toute la logique est gérée dans les 'systems' et les données sont mises à jour dans la fonction `udpate()`
+```
+update(delta) {
+ const entities = this.entityManager.getEntitiesWithComponents(VelocityComponent)
+
+ entities.forEach((entity) => {
+   const velocityComponent = entity.getComponent(VelocityComponent)
+   const positionComponent = entity.getComponent(PositionComponent)
+   if (!velocityComponent) return
+
+   positionComponent.x += velocityComponent.x * delta
+   positionComponent.y += velocityComponent.y * delta
+ })
+}
+```
+## Le store Redux
+Toutes les données (API, state etc...) sont stockées et gérées dans un store Redux. Elles sont accessibles partout dans l'application React avec le hook `useAppDispatch` et `useAppSelector`. 
+
+
+Des mocks sont disponibles dans le dossier 'mocks' et vont etre utilisés pour adapter les données API à l'application
+
+Il reste énormement de variables non typées, c'est en cours, on se concentre sur une premiere version fonctionnelle pour l'instant.
